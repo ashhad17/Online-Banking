@@ -4,7 +4,7 @@ import { CreateAccountDto } from './dto/create-account.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { ApiBearerAuth } from '@nestjs/swagger';
 // @UseGuards(JwtAuthGuard)
-@ApiBearerAuth('access-token') // 👈 matches addBearerAuth() key
+// @ApiBearerAuth('access-token') // 👈 matches addBearerAuth() key
 @UseGuards(JwtAuthGuard)
 @Controller('accounts')
 export class AccountController {

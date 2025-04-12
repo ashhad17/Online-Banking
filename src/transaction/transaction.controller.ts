@@ -3,6 +3,7 @@ import { TransactionService } from './transaction.service';
 import { InitiateTransactionDto } from './dto/initiate-transaction.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 // @UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 @Controller('transactions')
 export class TransactionController {
   constructor(private readonly transactionService: TransactionService) {}

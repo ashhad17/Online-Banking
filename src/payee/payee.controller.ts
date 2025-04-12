@@ -3,6 +3,7 @@ import { PayeeService } from './payee.service';
 import { CreatePayeeDto } from './dto/create-payee.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 // @UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 @Controller('payees')
 export class PayeeController {
   constructor(private readonly payeeService: PayeeService) {}

@@ -5,6 +5,7 @@ import { UpdatePasswordDto } from './dto/update-password.dto';
 import { LoginBankingDto } from './dto/login-banking.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
 @Controller('internet-banking')
 export class InternetBankingController {
   constructor(private readonly service: InternetBankingService) {}

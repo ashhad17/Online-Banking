@@ -4,12 +4,14 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Admin } from './entities/admin.entity';
 import { Account } from '../account/entities/account.entity';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AdminService {
   constructor(
     @InjectRepository(Admin) private adminRepo: Repository<Admin>,
-    @InjectRepository(Account) private accountRepo: Repository<Account>
+    @InjectRepository(Account) private accountRepo: Repository<Account>,
+    private jwtService: JwtService
   ) {}
 
   async login(email: string, password: string) {
@@ -19,8 +21,15 @@ export class AdminService {
     const match = await bcrypt.compare(password, admin.password);
     if (!match) throw new UnauthorizedException('Invalid credentials');
 
-    return { message: 'Login successful', adminId: admin.id };
-  }
+
+
+      
+  
+    const payload = { sub: admin?.id, email: admin?.email };
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
+    }
 
   async getPendingAccounts() {
     return this.accountRepo.find({ where: { is_active: false }, relations: ['user'] });
